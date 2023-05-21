@@ -5,49 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUDS | se7s | Create , Read , Update , Delete and Search </title>
-    <link rel="stylesheet" href="/css/datatables.css">
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
 </head>
 
 <body>
-    <!--  container -->
+    <!-- container -->
     <div class="container">
+
         <div class="row bg-success m-1 block">
             <div class="text-center col-md-12">
-                <h1><i class="fa-brands fa-product-hunt"></i> Cruds Operations</h1>
+                <h1><i class="fab fa-product-hunt"></i> CRUD OPeration <span id="countpro"></span></h1>
+
             </div>
         </div>
 
         <!-- Category -->
         <div class="row bg-secondary m-1 block">
+
             <div class="col-md-6 col-sm-12">
                 <div>
-                    <label id="lbcate"> Category :- * </label>
-                    <select id="ddlCategory" class="form-control">
-                        <option>Select Category ........</option>
-                        <option>Dell </option>
+                    <label id="lbcate">Category : *</label>
+                    <select id="ddlcategory" class="form-control">
+
+
                     </select>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
-                <label id="lbInpCate">Category Name :- *</label>
+                <label id="lbInpCtae">Category Name : *</label>
                 <div class="input-group">
-                    <input type="text" class="form-control w-75" placeholder="Enter Category Name" id="Category">
+                    <input class="form-control" placeholder="Enter Name Category" id="category">
+
                     <div class="form-group-append">
-                        <butt class=" btn btn-success">
+                        <butt class="btn btn-success" onclick="return ValidationCategory()" ,
+                            onclick="return lbInpCtae.value = '' ">
                             <i class="far fa-save"></i>
                         </butt>
-                        <butt class="btn btn-primary" data-toggle="modal" data-target="#modalId">
+                        <butt class="btn btn-primary" data-toggle="modal" data-target="#modelId">
                             <i class="fas fa-download"></i>
                         </butt>
                     </div>
                 </div>
             </div>
+
         </div>
-        <!--End Category -->
+        <!-- End Category -->
+
 
         <!-- Product -->
 
@@ -58,30 +65,33 @@
             </div>
 
             <div class="col-md-2 col-sm-12">
-                <label id="lbqutity">Quantity : *</label>
-                <input type="number" class="form-control" value="0" id="quntity">
+                <label id="lbqutity">Quntity : *</label>
+                <input type="number" class="form-control" value="0" id="quantity" onkeyup="GetTotal()"
+                    onchange="GetTotal()">
             </div>
 
             <div class="col-md-2 col-sm-12">
                 <label id="lbPrice">Price : *</label>
-                <input type="number" class="form-control" value="0" id="price">
+                <input type="number" class="form-control" value="0" id="price" onkeyup="GetTotal()"
+                    onchange="GetTotal()">
             </div>
 
             <div class="col-md-2 col-sm-12">
                 <label>Discount</label>
-                <input type="number" class="form-control" value="0" id="descount">
+                <input type="number" class="form-control" value="0" id="discount" onkeyup="GetTotal()"
+                    onchange="GetTotal()">
             </div>
             <div class="col-md-2 col-sm-12">
                 <label>Total</label>
                 <input type="number" class="form-control bg-danger text-center" disabled value="0" id="total">
             </div>
 
-            <div class="text-center col-md-12 mt-2">
+            <div class="text-center col-md-12 " style="margin-top: 10px;">
 
-                <button class="btn btn-dark w-25">
+                <button class="btn btn-dark w-25" onclick="Rest()">
                     <i class="fas fa-trash-restore"></i>
                 </button>
-                <button class="btn btn-success w-25">
+                <button class="btn btn-success w-25" onclick="return ValidationProduct();" id="btnSave">
                     <i class="fas fa-download"></i>
                 </button>
 
@@ -96,92 +106,72 @@
         <div class="row bg-secondary m-1 block" id="divPrint">
             <div class="col-md-12">
                 <table class="table table-striped table-border table-hover table-responsive bg-white col-md-12"
-                    id="tablePro">
+                    id="tablPro">
                     <thead>
                         <tr>
                             <td class="col-1">#</td>
                             <td class="col-2">Category</td>
-                            <td class="col-3">Product</td>
-                            <td class="col-1">Quantity</td>
+                            <td class="col-2">Product</td>
+                            <td class="col-2">Quntity</td>
                             <td class="col-1">Price</td>
-                            <td class="col-1">Discount</td>
+                            <td class="col-1">Descount</td>
                             <td class="col-1">Total</td>
                             <td class="col-2">Events</td>
+
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="col-1">1</td>
-                            <td class="col-2">Dell</td>
-                            <td class="col-3">Core i5</td>
-                            <td class="col-1">2</td>
-                            <td class="col-1">15540</td>
-                            <td class="col-1">40</td>
-                            <td class="col-1">15500</td>
-                            <td class="col-2">
-                                <button class="btn btn-info"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">2</td>
-                            <td class="col-2">HP</td>
-                            <td class="col-3">Core i7</td>
-                            <td class="col-1">5</td>
-                            <td class="col-1">20540</td>
-                            <td class="col-1">40</td>
-                            <td class="col-1">102500</td>
-                            <td class="col-2">
-                                <button class="btn btn-info"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-1">3</td>
-                            <td class="col-2">Dell</td>
-                            <td class="col-3">Core i7</td>
-                            <td class="col-1">4</td>
-                            <td class="col-1">18600</td>
-                            <td class="col-1">0</td>
-                            <td class="col-1">74400</td>
-                            <td class="col-2">
-                                <button class="btn btn-info"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
+                    <tbody id="tablePro">
+
+
                     </tbody>
                 </table>
             </div>
         </div>
 
         <!-- End Table -->
+
+
+
     </div>
-    <!--End container -->
+    <!-- End container -->
 
 
 
-    //
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-Launch
-</button> -->
+
 
     <!-- Modal -->
-    <div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitleId">Modal title</h5>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Category <span id="countCategory"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-                        Add rows here
+
+                        <table
+                            class="table table-striped table-border table-hover table-responsive bg-white w-100 text-center m-0">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Cate</td>
+                                    <td class="col-2">Events</td>
+
+                                </tr>
+                            </thead>
+                            <tbody id="bodyCate">
+
+
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -190,11 +180,11 @@ Launch
 
 
 
-    <script src="/js/jquery-3.6.0.js"></script>
-    <script src="/js/all.js"></script>
-    <script src="/js/datatables.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/js.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/js.js"></script>
 </body>
 
 </html>

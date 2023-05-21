@@ -1,14 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     background-color: #ffff;
 }
-.block{
-    border-radius: 15px;
+
+.block {
+    border-radius: 10px;
     padding: 20px;
 }
+
 h1,
 label {
     color: #ffff;
