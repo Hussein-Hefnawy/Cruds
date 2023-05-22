@@ -14,6 +14,7 @@ let proID;
 
 localStorage.Category != null ? CategoryArry = JSON.parse(localStorage.Category) : CategoryArry = [];
 localStorage.Product != null ? ProductArry = JSON.parse(localStorage.Product) : ProductArry = [];
+localStorage.setItem("Product", JSON.stringify(ProductArry));
 
 //Svae Category
 function SaveCategory() {
@@ -78,7 +79,7 @@ function ShowTableCategory() {
 
 function DeleteCategory(id) {
 
-    if (confirm('Are you Sur From Deleted ....?') == true) {
+    if (confirm('Are you Sure To Delete ....?') == true) {
         CategoryArry.splice(id, 1);
         localStorage.Category = JSON.stringify(CategoryArry);
         ShowTableCategory();
@@ -136,7 +137,8 @@ function GetTotal() {
 //Svae Product
 
 function SaveProduct() {
-
+    
+    let TablePro = ''
     let = NewProduct = {
         ddlcategory: ddlcategory.options[ddlcategory.selectedIndex].text,
         product: product.value,
@@ -210,7 +212,7 @@ function ShowTableProduct() {
 //Delete Product
 
 function DeleteProduct(id) {
-    if (confirm('Are You Sur From Deleted') == true) {
+    if (confirm('Are You Sure To Delete') == true) {
         ProductArry.splice(id, 1);
         localStorage.Product = JSON.stringify(ProductArry);
         ShowTableProduct();
